@@ -1,8 +1,10 @@
-import Number from "./components/Number";
+import React from "react";
+import ExpenseForm from "./components/ExpenseForm";
+
 function App() {
   return (
     <div className="App">
-      <Number />
+      <ExpenseForm />
     </div>
   );
 }

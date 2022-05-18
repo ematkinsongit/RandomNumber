@@ -2,11 +2,12 @@ import React from "react";
 import { Formik, useFormik, Form, Field } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
+import { Input } from "@material-ui/core";
 
 function ExpenseForm() {
   const validationSchema = Yup.object({
     min: Yup.number().required(),
-    max: Yup.number().required(),
+    max: Yup.number().required("required!"),
     count: Yup.number()
       .min(1)
       .max(10)
@@ -34,41 +35,39 @@ function ExpenseForm() {
   });
 
   return (
-    <Formik validationSchema={validationSchema}>
-      <div>
-        <Form onSubmit={formik.handleSubmit}>
-          <Field
-            id="min"
-            name="min"
-            type="number"
-            placeholder="Minimum"
-            value={formik.values.min}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          <Field
-            id="max"
-            name="max"
-            type="number"
-            placeholder="Maximum"
-            value={formik.values.max}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          <Field
-            id="count"
-            name="count"
-            type="number"
-            placeholder="Count"
-            value={formik.values.count}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
+    <div>
+      <form onSubmit={formik.handleSubmit} validationSchema={validationSchema}>
+        <Input
+          id="min"
+          name="min"
+          type="number"
+          placeholder="Minimum"
+          value={formik.values.min}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+        <Input
+          id="max"
+          name="max"
+          type="number"
+          placeholder="Maximum"
+          value={formik.values.max}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+        <Input
+          id="count"
+          name="count"
+          type="number"
+          placeholder="Count"
+          value={formik.values.count}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
 
-          <input type="submit" value="submit" />
-        </Form>
-      </div>
-    </Formik>
+        <input type="submit" value="submit" />
+      </form>
+    </div>
   );
 }
 

@@ -1,10 +1,10 @@
 import React from "react";
-import ExpenseForm from "./components/ExpenseForm";
+import MaterialForm from "./components/MaterialForm";
 
 function App() {
   return (
     <div className="App">
-      <ExpenseForm />
+      <MaterialForm />
     </div>
   );
 }

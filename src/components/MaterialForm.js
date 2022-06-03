@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
 import { Button, TextField } from "@mui/material";
 import * as yup from "yup";
@@ -24,27 +25,30 @@ const validationschema = yup.object({
 });
 
 function MaterialForm() {
+  const [formResult, setFormResult] = useState([]);
   const formik = useFormik({
     initialValues: {
       min: 0,
       max: 100,
       count: 1,
+      newNum: [],
     },
     validationschema: validationschema,
     onSubmit: (values) => {
       console.log(
         `Min: ${values.min}, Max: ${values.max}, Count: ${values.count}`
       );
-      // axios
-      //   .get(
-      //     `http://www.randomnumberapi.com/api/v1.0/random?min=${values.min}&max=${values.max}&count=${values.count}`
-      //   )
-      //   .then((result) => {
-      //     const newnum = result.data;
-      //     console.log(newnum);
-      //   });
+      axios
+        .get(
+          `http://www.randomnumberapi.com/api/v1.0/random?min=${values.min}&max=${values.max}&count=${values.count}`
+        )
+        .then((result) => {
+          let newNum = result.data;
+          setFormResult(newNum);
+        });
     },
   });
+
   return (
     <div>
       <form onSubmit={formik.handleSubmit} validationschema={validationschema}>
@@ -74,6 +78,7 @@ function MaterialForm() {
         <br />
         <Button type="submit">Submit</Button>{" "}
       </form>
+      <ul>Results:{formResult}</ul>
     </div>
   );
 }

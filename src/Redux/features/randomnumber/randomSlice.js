@@ -3,11 +3,7 @@ import axios from "axios";
 
 const RANDOM_URL = "http://randomnumberapi.com/api/v1.0/random?";
 
-const initialState = {
-  min: 0,
-  max: 10,
-  count: 1,
-};
+const initialState = [];
 export const fetchRandomNumbers = createAsyncThunk(
   "random/fetchRandomNumbers",
   async (min, max, count) => {

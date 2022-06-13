@@ -2,6 +2,8 @@ import React from "react";
 import { fetchRandomNumbers, selectRandom } from "./randomSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import ResultItem from "./ResultItem";
+import { nanoid } from "@reduxjs/toolkit";
 
 const RandomForm = () => {
   const dispatch = useDispatch();
@@ -13,6 +15,7 @@ const RandomForm = () => {
   const onMinChanged = (e) => setMin(e.target.value);
   const onMaxChanged = (e) => setMax(e.target.value);
   const onCountChanged = (e) => setCount(e.target.value);
+  const valueCheck = min <= max && count >= 1;
   const canSave = randomRequestStatus === "idle";
   const onRandomButtonClicked = () => {
     if (canSave) {
@@ -29,6 +32,9 @@ const RandomForm = () => {
       }
     }
   };
+  const newResults = randomResults.map((result) => (
+    <ResultItem key={nanoid()} result={result} />
+  ));
 
   return (
     <section>
@@ -57,11 +63,15 @@ const RandomForm = () => {
           value={count}
           onChange={onCountChanged}
         />
-        <button type="button" onClick={onRandomButtonClicked}>
+        <button
+          type="button"
+          onClick={onRandomButtonClicked}
+          disabled={!valueCheck}
+        >
           Get Random Numbers!
         </button>
       </form>
-      <p>{randomResults}</p>
+      {newResults}
     </section>
   );
 };

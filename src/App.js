@@ -1,10 +1,10 @@
 import React from "react";
-import MaterialForm from "./components/MaterialForm";
+import RandomForm from "./TodoRedux/features/randomnumber/RandomForm";
 
 function App() {
   return (
     <div className="App">
-      <MaterialForm />
+      <RandomForm />
     </div>
   );
 }

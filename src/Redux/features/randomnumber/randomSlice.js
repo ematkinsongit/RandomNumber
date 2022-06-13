@@ -6,7 +6,7 @@ const RANDOM_URL = "http://randomnumberapi.com/api/v1.0/random?";
 const initialState = [];
 export const fetchRandomNumbers = createAsyncThunk(
   "random/fetchRandomNumbers",
-  async (min, max, count) => {
+  async ({ min, max, count }) => {
     try {
       const response = await axios.get(
         `${RANDOM_URL}min=${min}&max=${max}&count=${count}`

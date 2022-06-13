@@ -1,5 +1,5 @@
 import React from "react";
-import RandomForm from "./TodoRedux/features/randomnumber/RandomForm";
+import RandomForm from "./Redux/features/randomnumber/RandomForm";
 
 function App() {
   return (

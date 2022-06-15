@@ -1,9 +1,9 @@
-import React from "react";
-import { fetchRandomNumbers, selectRandom } from "./randomSlice";
+import {React, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-import ResultItem from "./ResultItem";
 import { nanoid } from "@reduxjs/toolkit";
+import { fetchRandomNumbers, selectRandom } from "./randomSlice";
+import ResultItem from "./ResultItem";
+
 
 const RandomForm = () => {
   const dispatch = useDispatch();
@@ -12,13 +12,18 @@ const RandomForm = () => {
   const [max, setMax] = useState(10);
   const [count, setCount] = useState(1);
   const [randomRequestStatus, setRandomRequestStatus] = useState("idle");
+  
+  
   const onMinChanged = (e) => setMin(e.target.value);
   const onMaxChanged = (e) => setMax(e.target.value);
   const onCountChanged = (e) => setCount(e.target.value);
+  
+  
   const valueCheck = min <= max && count >= 1;
-  const canSave = randomRequestStatus === "idle";
+  const canRequest = randomRequestStatus === "idle";
+  
   const onRandomButtonClicked = () => {
-    if (canSave) {
+    if (canRequest) {
       try {
         setRandomRequestStatus("pending");
         dispatch(fetchRandomNumbers({ min, max, count })).unwrap();
